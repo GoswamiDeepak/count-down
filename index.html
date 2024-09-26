@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CountDown</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="center_div">
+            <p>Counting Down <span id="timer"></span></p>
+        </div>
+        <script>
+            let targetDate = new Date('2024-09-30T00:00:00'); // targeting year, month, day after T hours, secound, milisec
+            document.title = `Counting down to ${targetDate.getDate()} : ${targetDate.getMonth()}`;
+
+            function updateCountdown() {
+                const currentTime = new Date();
+                const timeDiff = targetDate - currentTime; //returning in milisecound
+                if (timeDiff < 0) {
+                    document.getElementById('countdown').timer =
+                        'The date has passed!';
+                    return;
+                }
+
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor(
+                    (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                );
+                const minutes = Math.floor(
+                    (timeDiff % (1000 * 60 * 60)) / (1000 * 60)
+                );
+
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                document.getElementById('timer').innerHTML =
+                    days +
+                    'd ' +
+                    hours +
+                    'h ' +
+                    minutes +
+                    'm ' +
+                    seconds +
+                    's ';
+            }
+            setInterval(updateCountdown, 1000);
+        </script>
+    </body>
+</html>
+
+<!-- <script>
+    const currentTime = new Date();
+    const hour = currentTime.getHours();
+    const minute = currentTime.getMinutes();
+    const secound = currentTime.getSeconds();
+    const year = currentTime.getFullYear();
+    const month = currentTime.getMonth();
+    const date = currentTime.getDate();
+    const nextMonth = currentTime.setFullYear(
+        currentTime.getFullYear(),
+        currentTime.getMonth() + 1
+    );
+    // console.log(currentTime.getHours());
+    console.log('Hours', hour);
+    console.log('minute', minute);
+    console.log('secound', secound);
+    console.log('year', year);
+    console.log('month', month);
+    console.log('date', date);
+    console.log({ nextMonth });
+</script> -->
+
+<!-- Function to dynamically set the new target date
+        function setNewDate() {
+            const month = document.getElementById('month').value;
+            const day = document.getElementById('day').value;
+
+            const year = targetDate.getFullYear(); // Keep the year 2025
+            targetDate = new Date(`${year}-${month}-${day}T00:00:00`);
+        } -->
